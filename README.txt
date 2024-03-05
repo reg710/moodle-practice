@@ -28,3 +28,5 @@ the data.
 See <https://docs.moodle.org> for details of Moodle's many features.
 
 - I'm working through the tutorial
+
+In order to get this running locally with MAMP, I changed the minimum requirements in the environments.xml file to allow the version of mySql that comes with MAMP.
