@@ -23,35 +23,29 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../config.php');
-require_once($CFG->dirroot. '/local/greetings/lib.php');
+function local_greetings_get_greeting($user) {
+    if ($user == null) {
+        return get_string('greetinguser', 'local_greetings');
+    }
 
-// This uses the system context.
-$context = context_system::instance();
-$PAGE->set_context($context);
+    $country = $user->country;
+    switch ($country) {
+        case 'AU':
+            $langstr = 'greetinguserau';
+            break;
+        case 'ES':
+            $langstr = 'greetinguseres';
+            break;
+        case 'FJ':
+            $langstr = 'greetinguserfj';
+            break;
+        case 'NZ':
+            $langstr = 'greetingusernz';
+            break;
+        default:
+            $langstr = 'greetingloggedinuser';
+            break;
+    }
 
-// This creates the page url.
-$PAGE->set_url(new moodle_url('/local/greetings/index.php'));
-
-// This decides which layout to use.
-$PAGE->set_pagelayout('standard');
-
-// Sets title for page (what browser tab will show).
-$PAGE->set_title(get_string('pluginname', 'local_greetings'));
-
-// Sets heading within page layout.
-$PAGE->set_heading(get_string('pluginname', 'local_greetings'));
-
-// This uses Moodle's output API to structure the page.
-echo $OUTPUT->header();
-
-if (isloggedin()) {
-    echo local_greetings_get_greeting($USER);
-} else {
-    echo get_string('greetinguser', 'local_greetings');
+    return get_string($langstr, 'local_greetings', fullname($user));
 }
-
-echo userdate(time(), get_string('strftimedaydate', 'core_langconfig'));
-
-
-echo $OUTPUT->footer();
