@@ -23,14 +23,32 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- require_once('../../config.php');
+require_once('../../config.php');
 
- // This uses the system context 
- $context = context_system::instance();
- $PAGE->set_context($context);
+// This uses the system context.
+$context = context_system::instance();
+$PAGE->set_context($context);
 
- // This creates the page url
- $PAGE->set_url(new moodle_url('/local/greetings/index.php'));
+// This creates the page url.
+$PAGE->set_url(new moodle_url('/local/greetings/index.php'));
 
- // This decides which layout to use
- $PAGE->set_pagelayout('standard');
+// This decides which layout to use.
+$PAGE->set_pagelayout('standard');
+
+// Sets title for page (what browser tab will show).
+$PAGE->set_title(get_string('pluginname', 'local_greetings'));
+
+// Sets heading within page layout.
+$PAGE->set_heading(get_string('pluginname', 'local_greetings'));
+
+// This uses Moodle's output API to structure the page.
+echo $OUTPUT->header();
+
+if (isloggedin()) {
+    echo '<h3>Greetings, ' . fullname($USER) . '</h3>';
+} else {
+    echo '<h3>Greetings, user</h3>';
+}
+
+
+echo $OUTPUT->footer();
