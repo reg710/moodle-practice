@@ -42,6 +42,9 @@ $PAGE->set_title(get_string('pluginname', 'local_greetings'));
 // Sets heading within page layout.
 $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 
+// Create instance of greeting form.
+$messageform = new \local_greetings\form\message_form();
+
 // This uses Moodle's output API to structure the page.
 echo $OUTPUT->header();
 
@@ -53,5 +56,6 @@ if (isloggedin()) {
 
 echo userdate(time(), get_string('strftimedaydate', 'core_langconfig'));
 
+$messageform->display();
 
 echo $OUTPUT->footer();
