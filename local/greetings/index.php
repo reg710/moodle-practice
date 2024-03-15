@@ -59,7 +59,7 @@ echo userdate(time(), get_string('strftimedaydate', 'core_langconfig'));
 $messageform->display();
 if ($data = $messageform->get_data()) {
     // A good way to test that data is being captured when you hit submit.
-    // var_dump($data);
+    // var_dump($data); .
 
     $message = required_param('message', PARAM_TEXT);
     echo $OUTPUT->heading($message, 4);
