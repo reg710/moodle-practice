@@ -45,6 +45,8 @@ $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 // Create instance of greeting form.
 $messageform = new \local_greetings\form\message_form();
 
+
+// Save messages to the db.
 if ($data = $messageform->get_data()) {
     $message = required_param('message', PARAM_TEXT);
 
@@ -69,5 +71,11 @@ if (isloggedin()) {
 echo userdate(time(), get_string('strftimedaydate', 'core_langconfig'));
 
 $messageform->display();
+
+// Display messages from db.
+$messages = $DB->get_records('local_greetings_messages');
+foreach ($messages as $m) {
+    echo '<p>' . $m->message . ', ' . $m->timecreated . '</p>';
+}
 
 echo $OUTPUT->footer();
