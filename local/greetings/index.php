@@ -45,6 +45,18 @@ $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 // Create instance of greeting form.
 $messageform = new \local_greetings\form\message_form();
 
+if ($data = $messageform->get_data()) {
+    $message = required_param('message', PARAM_TEXT);
+
+    if (!empty($message)) {
+        $record = new stdClass;
+        $record->message = $message;
+        $record->timecreated = time();
+
+        $DB->insert_record('local_greetings_messages', $record);
+    }
+}
+
 // This uses Moodle's output API to structure the page.
 echo $OUTPUT->header();
 
@@ -57,12 +69,5 @@ if (isloggedin()) {
 echo userdate(time(), get_string('strftimedaydate', 'core_langconfig'));
 
 $messageform->display();
-if ($data = $messageform->get_data()) {
-    // A good way to test that data is being captured when you hit submit.
-    // var_dump($data); .
-
-    $message = required_param('message', PARAM_TEXT);
-    echo $OUTPUT->heading($message, 4);
-}
 
 echo $OUTPUT->footer();
