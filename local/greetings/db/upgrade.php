@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * 
  * @package     local_greetings
  * @copyright   2024 RCon <reg710@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,8 +23,8 @@
 /**
  * Define upgrade steps to be performed to upgrade the plugin from the
  * older version to the current one.
- * 
- * @param int $oldversion Version number the plugin is being upgraded from.
+ *
+ * @param int $oldversion Version number the plugin is being upgraded from
  */
 
 function xmldb_local_greetings_upgrade($oldversion) {
